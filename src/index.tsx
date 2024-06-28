@@ -1,15 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { StoreProvider } from "./Store/ProviderStore";
+import { Provider } from "mobx-react";
+import { HRStore } from "./Store/HRStore";
+declare module "*.png";
+declare module "*.jpg";
+
+const hrStore = new HRStore();
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider hrStore={hrStore}>
+      <StoreProvider value={hrStore}>
+        <App />
+      </StoreProvider>
+    </Provider>
   </React.StrictMode>
 );
 
